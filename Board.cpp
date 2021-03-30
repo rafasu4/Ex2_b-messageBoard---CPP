@@ -1,5 +1,6 @@
 #include "Board.hpp"
 constexpr char SPACE = '_';
+constexpr int noNeedSpaceInPrint = 100;
 
 namespace ariel
 {
@@ -30,6 +31,27 @@ namespace ariel
         //if the string is empty - nothing to be changed
         if (!s.empty())
         {
+            //checking and updating, in case of the following ,the borders for show function
+            if(!isInit){
+                minRow = maxRow = row;
+                minCol = col;
+                maxCol = col + s.size();
+                isInit = true;
+            }
+            else{
+                if(row < minRow){
+                    minRow = row;
+                }
+                if(row > maxRow){
+                    maxRow = row;
+                }
+                if(col < minCol){
+                    minCol = col;
+                }
+                if(col > maxCol){
+                    maxCol = col;
+                }
+            }
             if (d == Direction::Horizontal)
             {
                 //if the giving row is in the board
@@ -76,14 +98,28 @@ namespace ariel
     void Board::show()
     {
         map<unsigned int, pair<unsigned int, vector<char>>>::iterator it = messageBoard.begin();
-        for (pair<unsigned int, pair<unsigned int, vector<char>>> it : messageBoard)
-        {
-            vector<char> line = it.second.second;
-            for (char c : line)
-            {
-                cout << c;
+        unsigned int firstLine = minRow;
+        while(firstLine <= maxRow){
+            unsigned int sizeOfPrintingLine = maxCol - minCol + 1;
+            if(messageBoard.count(firstLine) > 0){
+                if(firstLine < noNeedSpaceInPrint){
+                    cout << " ";
+                }
+                cout << firstLine << ":";
+                cout << this->readH(firstLine, minCol, sizeOfPrintingLine);
             }
-            cout << endl;
+            else{
+                if(firstLine < noNeedSpaceInPrint){
+                    cout << " ";
+                }
+                cout << firstLine << ":";
+                for (int i = 0; i < sizeOfPrintingLine; i++)
+                {
+                    cout << SPACE;
+                }
+            }
+            cout <<endl;
+            firstLine++;
         }
     }
 

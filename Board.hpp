@@ -11,6 +11,11 @@ class Board{
 
     private:
     std::map<unsigned int, pair<unsigned int, vector<char>> > messageBoard;
+    unsigned int minCol = 0;
+    unsigned int maxCol = 0;
+    unsigned int minRow = 0;
+    unsigned int maxRow = 0;
+    bool isInit = false;
 
     
     public:
