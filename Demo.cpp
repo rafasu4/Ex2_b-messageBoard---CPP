@@ -8,19 +8,17 @@ using ariel::Direction;
 using namespace std;
 
 int main() {
-	ariel::Board board;
-	 board.post(0, 0, Direction::Horizontal, "Reut");
-    board.post(0, 0, Direction::Vertical, "Reut");
-    board.post(0, 3, Direction::Vertical, "Mas");
-    board.post(5, 2, Direction::Horizontal, "Yakir");
-    board.post(4, 6, Direction::Horizontal, "temp");
-    board.post(1, 6, Direction::Vertical, "ariela");
-    board.post(5, 6, Direction::Vertical, "W"); 
-	cout << board.read(5, 2, Direction::Horizontal, 7) << endl; 
-	board.show(); // shows the board in a reasonable way. For example:
-		//    98:  _________
-		//    99:  ____x____
-		//    100: __abyd___
-		//    101: ____z____
-		//    102: _________
+    Board b;
+	string c;
+    string name = "Raphael";
+    for (unsigned int i = 0; i < name.length(); i++)
+    {
+         c = name.at(i);
+        b.post(10 + i, 10 + i, Direction::Horizontal, c);
+    }
+	 b.post(11,11,Direction::Vertical,"ariel");
+	 b.post(15,15,Direction::Vertical,"ex2");
+	 b.show();
+    
+    return 0;
 }

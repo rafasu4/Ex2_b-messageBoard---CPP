@@ -7,6 +7,7 @@ VALGRIND_FLAGS=-v --leak-check=full --show-leak-kinds=all  --error-exitcode=99
 SOURCES=Board.cpp
 OBJECTS=$(subst .cpp,.o,$(SOURCES))
 
+
 run: test
 	./$^
 
@@ -15,7 +16,6 @@ test: TestRunner.o StudentTest1.o StudentTest2.o $(OBJECTS)
 
 main: Main.o $(OBJECTS)
 
-	$(CXX) $(CXXFLAGS) $^ -o main
 demo: Demo.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o demo
 	

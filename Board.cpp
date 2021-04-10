@@ -51,6 +51,9 @@ namespace ariel
                 if(col > maxCol){
                     maxCol = col;
                 }
+                if(d == Direction::Vertical && row + s.length() > maxRow){
+                    maxRow = row + s.length() - 1;
+                }
             }
             if (d == Direction::Horizontal)
             {
@@ -100,7 +103,8 @@ namespace ariel
         map<unsigned int, pair<unsigned int, vector<char>>>::iterator it = messageBoard.begin();
         unsigned int firstLine = minRow;
         while(firstLine <= maxRow){
-            unsigned int sizeOfPrintingLine = maxCol - minCol + 1;
+            unsigned int sizeOfPrintingLine = maxCol - minCol + 4;
+            //if the current row is within the board
             if(messageBoard.count(firstLine) > 0){
                 if(firstLine < noNeedSpaceInPrint){
                     cout << " ";
@@ -222,6 +226,7 @@ namespace ariel
         unsigned int startOfPost = currentLine.first;
         vector<char> currentPost = currentLine.second;
         unsigned int sizeOfCurrentPost = currentPost.size();
+        //if col is within the range of the existing line
         if (startOfPost <= col && col <= startOfPost + sizeOfCurrentPost)
         {
             currentPost.at(col - startOfPost) = c;
@@ -232,7 +237,7 @@ namespace ariel
             vector<char> updatedPost = vector<char>();
             updatedPost.push_back(c);
             unsigned int i = col;
-            while (i < startOfPost)
+            while (i < startOfPost - 1)
             {
                 updatedPost.push_back(SPACE);
                 i++;
